@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: ReplicaSet
+metadata:
+  name: testing-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: test-service
+        version: "2"
+    spec:
+      containers:
+        - name: test-ser
+          image: "docker.io/jagadesh1982/testing-service"
+          ports:
+           - containerPort: 9876

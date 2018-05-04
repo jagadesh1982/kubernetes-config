@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp-pod
+  labels:
+   app: myapp
+   region: IN
+   rack: r1
+   version: "1.1"
+   env: development
+   owner: tester
+spec:
+  containers:
+    - name: myapp
+      image: docker.io/rajpr01/myapp
+      ports:
+      - containerPort: 3000
