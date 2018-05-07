@@ -1,0 +1,1000 @@
+  227  ll
+  228  vi Dockerfile 
+  229  cd /root/
+  230  ll
+  231  cd testing-service/
+  232  ll
+  233  vi Dockerfile 
+  234  clear
+  235  docker run -d -p 10000:9876 docker.io/jagadesh1982/testing-service
+  236  docker ps | grep testing
+  237  curl localhost:10000/info
+  238  clear
+  239  vi Dockerfile 
+  240  docker build . -t testing-service:1
+  241  docker images
+  242  docker rmi -f testing-service
+  243  docker rmi -f testing-service:1
+  244  clear
+  245  docker build . -t dokcer.io/jagadesh1982/testing-service:1
+  246  docker run -d -p 10000:9876 docker.io/jagadesh1982/testing-service:1
+  247  clear
+  248  docker images
+  249  docker rmi -f dokcer.io/jagadesh1982/testing-service:1
+  250  clear
+  251  docker build . -t docker.io/jagadesh1982/testing-service:1
+  252  docker images
+  253  docker run -d -p 10000:9876 docker.io/jagadesh1982/testing-service:1
+  254  docker run -d -p 10001:9876 docker.io/jagadesh1982/testing-service:1
+  255  docker ps | grep testing
+  256  curl localhost:10001/info
+  257  clear
+  258  docker images
+  259  docker push docker.io/jagadesh1982/testing-service:1
+  260  clear
+  261  ll
+  262  cd ..
+  263  cd kubetesting/kube-testing/
+  264  ll
+  265  vi basic-deployment.yml
+  266  clear
+  267  kubectl get pods
+  268  kubectl get deployments
+  269  clear
+  270  kubectl create -f basic-deployment.yml 
+  271  kubectl get deployments
+  272  kubectl get pods
+  273  kubectl describe pod test-service-deploy-85c8787b6f-6msvv | grep IP
+  274  curl 10.47.0.1:9876/info
+  275  cat basic-deployment.yml 
+  276  kubectl get rs
+  277  kubectl get rc
+  278  clear
+  279  cat basic-deployment.yml 
+  280  cp basic-deployment.yml basic-update-deployment.yml
+  281  vi basic-update-deployment.yml 
+  282  clear
+  283  kubectl apply -f basic-update-deployment.yml 
+  284  kubectl get deploy
+  285  kubectl get rc
+  286  kubectl get rs
+  287  kubectl get pods
+  288  kubectl get rs
+  289  kubectl get pods
+  290  clear
+  291  kubectl get deploy
+  292  kubectl edit deploy/test-service-deploy
+  293  kubectl get deploy
+  294  kubectl get rc
+  295  kubectl get rs
+  296  kubectl get pods
+  297  clear
+  298  kubectl get pods
+  299  kubectl describe pod test-service-deploy-98bf447c8-c7ct6 | grep IP
+  300  curl http://10.44.0.1:9876/info
+  301  clear
+  302  kubectl get deploy
+  303  kubectl rollout history deploy/test-service-deploy
+  304  kubectl rollout deploy/test-service-deploy --to-revision=1
+  305  kubectl rollout deploy/test-service-deploy --to-revison=1
+  306  kubectl rollout undo deploy/test-service-deploy --to-revision=1
+  307  kubectl rollout status deploy/test-service-deploy
+  308  kubectl get pods
+  309  kubectl describe pod test-service-deploy-85c8787b6f-lkh9k | grep IP
+  310  curl 10.47.0.3:9876/infoo
+  311  curl 10.47.0.3:9876/info
+  312  clear
+  313  kubectl get deploy
+  314  kubectl delete deploy test-service-deploy
+  315  clear
+  316  kubectl get pods
+  317  clear
+  318   clear
+  319  ls -alrt
+  320  clear
+  321  cd ..
+  322  ll
+  323  clear
+  324  ll
+  325  ccat simple-test-replica.yml 
+  326  clear
+  327  ll
+  328  cat sample-test.yml 
+  329  cat simple-test-replica.yml 
+  330  mv sample-test.yml simple-test-replica.yml ./kube-testing/
+  331  clear
+  332  ll
+  333  cd kube-testing/
+  334  clear
+  335  ll
+  336  kubectl get pods
+  337  kubectl get deploy
+  338  kubectl get rs
+  339  kubectl delete rs sample-test
+  340  kubectl get pods
+  341  clear
+  342  ll
+  343  cat sample-test.yml 
+  344  mv sample-test.yml sample-test-pod.yml
+  345  kubectl create -f sample-test-pod.yml 
+  346  kubectl get pods
+  347  ll
+  348  mv simple-test-replica.yml basic-service-sample-test.yml
+  349  cat basic-
+  350  cat basic-service-sample-test.yml 
+  351  kubectl get svc
+  352  kubectl create -f basic-service-sample-test.yml 
+  353  kubectl get svc
+  354  clear
+  355  kubectl get pods
+  356  kubectl get rc
+  357  kubectl get rs
+  358  kubectl delete rs sample-test
+  359  kubectl get deploy
+  360  kubectl get pods
+  361  kubectl get svc
+  362  kubectl delete pod sample-test
+  363  clear
+  364  kubectl get pods
+  365  kubectl delete pod myapp-pod
+  366  clear
+  367  kubectl get pods
+  368  kubectl get svc
+  369  kubectl delete svc aplha-prod
+  370  clear
+  371  cat sample-test-pod.yml 
+  372  cat basic-service-sample-test.yml 
+  373  clear
+  374  kubectl get pods
+  375  kubectl get svc
+  376  kubectl create -f sample-test-pod.yml 
+  377  kubectl get pods
+  378  kubectl create -f basic-service-sample-test.yml 
+  379  kubectl get rs
+  380  cat basic-service-sample-test.yml 
+  381  clear
+  382  kubectl get rs
+  383  kubectl delete rs sample-test
+  384  kubectl get pods
+  385  kubectl delete pod myapp-pod
+  386  clear
+  387  cd ..
+  388  ll
+  389  cat myapp-service.yml 
+  390  mv myapp-service.yml ./kube-testing/
+  391  clear
+  392  cd kube-testing/
+  393  clear
+  394  ll
+  395  cat myapp-service.yml 
+  396  cat basic-replica
+  397  cat basic-replica.yml 
+  398  clear
+  399  ll
+  400  rm basic-service-sample-test.yml 
+  401  mv myapp-service.yml basic-service-sample-test.yml
+  402  clear
+  403  kubectl get pods
+  404  clear
+  405  kubectl create -f sample-test-pod.yml 
+  406  kubectl create -f basic-service-sample-test.yml 
+  407  kubectl get pods
+  408  kubectl get svc
+  409  curl 10.100.17.180:9876/info
+  410  curl 10.100.17.180:443/info
+  411  curl 10.100.17.180:3000/ping
+  412  curl 10.100.17.180:8000/ping
+  413  cat sample-test-pod.yml 
+  414  curl 10.100.17.180:3000/ping
+  415  curl 10.100.17.180:3000/
+  416  curl 10.100.17.180:3000/ping
+  417  clear
+  418  kubectl get pods
+  419  kubectl get svc
+  420  cat sample-test-pod.yml 
+  421  cat basic-service-sample-test.yml 
+  422  clear
+  423  kubectl get pods
+  424  kubectl get svc
+  425  cat sample-test-pod.yml 
+  426  curl 10.100.17.180:3000
+  427  curl 10.100.17.180:3000/ping
+  428  docker images
+  429  docker run -d -p 10000:8000 docker.io/jagadesh1982/sample-test
+  430  docker run -d -p 10000:8000 docker.io/jagadesh1982/sample-test:1
+  431  docker run -d -p 10002:8000 docker.io/jagadesh1982/sample-test:1
+  432  docker ps | grep sample-test
+  433  curl http://localhost:10002/ping
+  434  curl http://localhost:10002/sample
+  435  docker attach e4039afdd194
+  436  clear
+  437  docker svc
+  438  clear
+  439  kubectl get pods
+  440  kubectl get svc
+  441  kubectl delete pod myapp-pod
+  442  kubectl delete svc myapp-svc
+  443  clear
+  444  cd ..
+  445  cat * | grep raj
+  446  ll
+  447  cat basic-deployment.yml 
+  448  cd kube-testing/
+  449  vi sample-test-pod.yml 
+  450  clear
+  451  kubectl create -f sample-test-pod.yml 
+  452  kubectl create -f basic-service-sample-test.yml 
+  453  kubectl get pods
+  454  kubectl get svc
+  455  curl 10.106.17.206:3000/
+  456  curl 10.106.17.206:3000/myapp
+  457  kubectl get pods
+  458  kubectl describe pod myapp-pod
+  459  kubectl describe pod myapp-pod | grep IP
+  460  curl 10.44.0.1:3000
+  461  clear
+  462  kubectl get pods
+  463  kubectl get svc
+  464  curl 10.106.17.206:3000
+  465  cat sample-test-pod.yml 
+  466  cat basic-service-sample-test.yml 
+  467  clear
+  468  kubectl get svc
+  469  iptables-save | grep myapp-svc
+  470  kubectl get pods
+  471  kubectl describe pod myapp-pod | grep IP
+  472  clear
+  473  kubectl get rc
+  474  kubectl get rs
+  475  kubectl get deploy
+  476  clear
+  477  ll
+  478  cat sample-test-pod.yml 
+  479  clear
+  480  cat basic-service-sample-test.yml 
+  481  clear
+  482  kubectl get rc
+  483  kubectl get rs
+  484  kubectl get deploy
+  485  kubectl get pods
+  486  kubectl edit pod myapp-pod
+  487  clear
+  488  ll
+  489  vi basic-health-check-pod.yml
+  490  vi basic-health-check-pod.yml 
+  491  lcear
+  492  cat basic-health-check-pod.yml 
+  493  clear
+  494  cat basic-health-check-pod.yml 
+  495  clear
+  496  cat basic-health-check-pod.yml 
+  497  clear
+  498  kubectl create -f basic-health-check-pod.yml 
+  499  kubectl get pods
+  500  kubectl describe pod healthcheck
+  501  exit
+  502  clear
+  503  oc get status
+  504  clear
+  505  ping 172.16.202.96
+  506  hostname -I
+  507  cd ..
+  508  cd /root/vagrant/
+  509  vagrant ssh node1
+  510  clear
+  511  kubectl get deployment
+  512  clear
+  513  pwd
+  514  mkdir nginx
+  515  cd nginx/
+  516  clear
+  517  ll
+  518  docker run --name=nginx -d -v ${pwd}:/var/log/nginx -p 5000:80 nginnx
+  519  docker run --name=nginx -d -v ${pwd}:/var/log/nginx -p 5000:80 nginx
+  520  clear
+  521  docker run --name=nginx -d -v ${pwd}:/var/log/nginx -p 5000:80 nginx
+  522  docker run --name=nginx -d -v .:/var/log/nginx -p 5000:80 nginx
+  523  clear
+  524  docker run --name=nginx -d -v $(pwd):/var/log/nginx -p 5000:80 nginx
+  525  docker ps | grep nginx
+  526  curl localhost:5000/
+  527  ll
+  528  cat access.log 
+  529  clear
+  530  docker ps | grep nginx
+  531  docker kill nginx
+  532  docker ps | grep nginx
+  533  clear
+  534  docker pull mysql/mysql-server:latest
+  535  docker images
+  536  docker images | grep mysql
+  537  docker run -d --name=mysql docker.io/mysql/mysql-server
+  538  docker ps | grep mysql
+  539  docker kill 4d92279f1a63
+  540  clear
+  541  docker run --name=mysql1  -v $(pwd):/var/lib/mysql -d mysql/mysql-server:latest
+  542  docker ps | grep mysql
+  543  docker ps | grep mysql1
+  544  docker ps | grep mysql
+  545  docker ps -a 
+  546  clear
+  547  docker images
+  548  docker run --name=mysql1 -v $(pwd):/var/lib/mysql -d mysql/mysql-server
+  549  docker run --name=mysql2 -v $(pwd):/var/lib/mysql -d mysql/mysql-server
+  550  docker ps
+  551  docker ps -a
+  552  clear
+  553  docker run --name=mysql2  -d mysql/mysql-server
+  554  docker run --name=mysql3  -d mysql/mysql-server
+  555  docker ps | grep mysql
+  556  clear
+  557  cd /root/kubetesting/
+  558  cd kube-testing/
+  559  clear
+  560  ll
+  561  cat basic-multi-container-pod.yml 
+  562  clear
+  563  cd ..
+  564  clear
+  565  ll
+  566  cd ..
+  567  clear
+  568  ll
+  569  cd vagrant/
+  570  ll
+  571  cat Vagrantfile 
+  572  kubectl get nodes
+  573  clear
+  574  cd ..
+  575  cd kubetesting/kube-testing/
+  576  clear
+  577  clcear
+  578  clear
+  579  ll
+  580  kubectl get pods
+  581  clear
+  582  ll
+  583  kubectl create -f basic-multi-container-pod.yml 
+  584  kubectl get pods
+  585  kubectl get pods -o wide
+  586  kubectl describe pod testing-service
+  587  kubectl exec testing-service -c shell -it -- bash
+  588  \
+  589  ss -tlpn | grep 10250
+  590  kubectl get ndoes
+  591  kubectl get nodes
+  592  cd ..
+  593  cd vagrant/
+  594  clear
+  595  cat Vagrantfile 
+  596  vagrant ssh node1
+  597  clear
+  598  kubectl get pods
+  599  kubectl get deployment
+  600  kubectl get rc
+  601  kubectl get rs
+  602  clear
+  603  kubectl get pods
+  604  kubectl delete pod testing-service
+  605  clear
+  606  kubectl get pods
+  607  clear
+  608  kubectl get pods
+  609  watch kubectl get pods
+  610  clear
+  611  kubectl get pods
+  612  cd ..
+  613  cd kubetesting/kube-testing/
+  614  clear
+  615  kubectl create -f basic-multi-container-pod.yml 
+  616  kubectl get pods
+  617  clear
+  618  kubectl get pods
+  619  kubectl exec testing-service -c test-ser --it -- bash
+  620  kubectl exec testing-service -c test-ser -it -- bash
+  621  clear
+  622  ls -alrt
+  623  clar
+  624  clear
+  625  kubectl get nodes
+  626  cd ..
+  627  cd vagrant/
+  628  cagt Vagrantfile 
+  629  cat Vagrantfile 
+  630  vagrant ssh node1
+  631  clear
+  632  kubectl get ns
+  633  kubectl  ns --help
+  634  kubectl namespace --help
+  635  kubectl get projects
+  636  kubectl get types
+  637  kubectl get type
+  638  kubectl types
+  639  clear
+  640  cd ..
+  641  cd kubetesting/
+  642  cd kube-testing/
+  643  ll
+  644  cat basic-multi-container-pod.yml 
+  645  clear
+  646  ll
+  647  cat basic-multi-container-pod.yml 
+  648  clear
+  649  kubectl get pods
+  650  clear
+  651  ll
+  652  git clone https://github.com/jagadish12/kubenetes-config.git
+  653  clear
+  654  ls -alr
+  655  cd kubenetes-config/
+  656  ll
+  657  cd ..
+  658  clear
+  659  ll
+  660  rm -rf kubenetes-config/
+  661  cd ..
+  662  git clone kubenetes-config
+  663  clear
+  664  git clone https://github.com/jagadish12/kubenetes-config.git
+  665  clear
+  666  ll
+  667  mv kube-testing/* kubenetes-config/
+  668  cd kubenetes-config/
+  669  ll
+  670  cd ..
+  671  clear
+  672  ll
+  673  git add .
+  674  ls -alrt
+  675  cd kubenetes-config/
+  676  clear
+  677  ll
+  678  ls -alrt
+  679  git add .
+  680  git commit -m "first commit"
+  681  clear
+  682  ls
+  683  git push origin master
+  684  clear
+  685  yum install nfs-utils nfs-utils-lib
+  686  chkconfig nfs on
+  687  service rpcbind start
+  688  service nfs start
+  689  clear
+  690  df -hT
+  691  cd /loddisk2/
+  692  mkdir share
+  693  pwd
+  694  cd share/
+  695  pwd
+  696  vi /etc/exports
+  697  hostname -I
+  698  vi /etc/exports
+  699  clear
+  700  exportfs -a
+  701  yum install nfs-utils nfs-utils-lib -y
+  702  mkdir -p /mnt/share
+  703  mount 10.131.143.157:/loddisk2/share /mnt/share
+  704  hostname -I
+  705  mount 10.131.175.138:/loddisk2/share /mnt/share
+  706  cd /loddisk2/share/
+  707  cat /etc/exports
+  708  exportfs -a
+  709  cd /mnt/share/
+  710  mount 10.131.175.138:/loddisk2/share /mnt/share
+  711  mount -o v3 10.131.175.138:/loddisk2/share /mnt/share
+  712  mount  -t nfs4 10.131.175.138:/loddisk2/share /mnt/share
+  713  mount -a
+  714  clear
+  715  cd /root/
+  716  ll
+  717  mount
+  718  df -hT
+  719  cat /etc/exports
+  720  hostname
+  721  hostname -I
+  722  vi /etc/exports
+  723  clear
+  724  exportfs -a
+  725  mount  -t nfs4 10.131.175.138:/loddisk2/share /mnt/share
+  726  df -hT
+  727  clear
+  728  mount | grep loddisk
+  729  clear
+  730  cd /root/
+  731  ll
+  732  cd kubetesting/
+  733  ll
+  734  cd kubenetes-config/
+  735  vi basic-persistant-volume.yml
+  736  hostname -I
+  737  vi basic-persistant-volume.yml 
+  738  clear
+  739  kubectl create -f basic-persistant-volume.yml 
+  740  kubectl get pods
+  741  kubectl get pv
+  742  cat basic-persistant-volume.yml 
+  743  vi basic-pvc.yml
+  744  vi basic-pvc.yml 
+  745  clear
+  746  kubectl create -f basic-pvc.yml 
+  747  kubectl get pv
+  748  kubectl get pvc
+  749  ll
+  750  cp basic-single-container-pod.yml basic-single-container-volume-pod.yml 
+  751  vi basic-single-container-volume-pod.yml 
+  752  clear
+  753  kubectl get pods
+  754  cat basic-single-container-volume-pod.yml 
+  755  kubectl get dc
+  756  kubectl get deployment
+  757  kubectl get serrvice
+  758  clear
+  759  kubectl get svc
+  760  kubectl get rc
+  761  kubectl get rs
+  762  clear
+  763  kubectl create -f basic-single-container-volume-pod.yml 
+  764  kubectl get pvc
+  765  kubectl get pv
+  766  vi basic-single-container-volume-pod.yml 
+  767  clear
+  768  kubectl create -f basic-single-container-volume-pod.yml 
+  769  kubectl get pvc
+  770  kubectl get pv
+  771  vi basic-single-container-volume-pod.yml 
+  772  clear
+  773  kubectl create -f basic-single-container-volume-pod.yml 
+  774  kubectl get pods
+  775  kubectl delete pod testing-service
+  776  kubectl get pods
+  777  kubectl create -f basic-single-container-volume-pod.yml 
+  778  kubectl get pods
+  779  watch kubectl get pods
+  780  clear
+  781  kubectl get pods
+  782  cat basic-single-container-volume-pod.yml 
+  783  clear
+  784  kubectl get pods
+  785  clear
+  786  kubectl get pods
+  787  vi basic-single-container-volume-pod.yml 
+  788  ll
+  789  clear
+  790  kubectl get pods
+  791  kubectl logs testing-service
+  792  kubectl get pods
+  793  kubectl delete pod testing-service
+  794  kubectl get pods
+  795  vi basic-single-container-volume-pod.yml 
+  796  hostname
+  797  vi basic-single-container-volume-pod.yml 
+  798  clear
+  799  kubectl get pods
+  800  kubectl create -f basic-single-container-volume-pod.yml 
+  801  vi basic-single-container-volume-pod.yml 
+  802  clear
+  803  kubectl create -f basic-single-container-volume-pod.yml 
+  804  vi basic-single-container-volume-pod.yml 
+  805  cllear
+  806  clear
+  807  kubectl create -f basic-single-container-volume-pod.yml 
+  808  vi basic-single-container-volume-pod.yml 
+  809  clear
+  810  kubectl create -f basic-single-container-volume-pod.yml 
+  811  kubectl get pods
+  812  watch kubectl get pods
+  813  clear
+  814  kubectl get pods
+  815  cat basic-single-container-volume-pod.yml 
+  816  kubectl get pods
+  817  kubectl delete pod testing-service
+  818  clear
+  819  vi basic-single-container-volume-pod.yml 
+  820  kubectl get nodes
+  821  vi basic-single-container-volume-pod.yml 
+  822  clear
+  823  kubectl get pds
+  824  kubectl get pods
+  825  kubectl create -f basic-single-container-volume-pod.yml 
+  826  kubectl get pods
+  827  kubectl delete pod testing-service
+  828  clear
+  829  cp basic-single-container-volume-pod.yml basic-single-container-node-selector.yml
+  830  ll
+  831  vi basic-single-container-node-selector.yml 
+  832  clear
+  833  cat basic-single-container-node-selector.yml 
+  834  kubectl create -f basic-single-container-node-selector.yml 
+  835  kubectl get pods
+  836  kubectl get pods\
+  837  kubectl get pods
+  838  vi basic-single-container-node-selector.yml 
+  839  kubectl get pods
+  840  kubectl delete pod testing-service
+  841  vi basic-single-container-node-selector.yml 
+  842  clear
+  843  kubectl create -f basic-single-container-node-selector.yml 
+  844  kubectl get pods
+  845  kubectl describe pod testing-service
+  846  clear
+  847  kubectl get pods
+  848  kubectl delete pod testing-service
+  849  vi basic-single-container-node-selector.yml 
+  850  clear
+  851  kubectl create -f basic-single-container-node-selector.yml 
+  852  kubectl get pods
+  853  kubectl create -f basic-single-container-node-selector.yml 
+  854  kubectl get pods
+  855  kubectl delete pod testing-service
+  856  kubectl get nodes
+  857  vi basic-single-container-node-selector.yml 
+  858  clear
+  859  kubectl get nodes
+  860  kubectl label nodes work-node1 label=node1
+  861  kubectl get nodes -o wide
+  862  kubectl get nodes --show-labels
+  863  vi basic-single-container-node-selector.yml 
+  864  clcear
+  865  clear
+  866  kubectl get pods
+  867  kubectl create -f basic-single-container-node-selector.yml 
+  868  kubectl get pods
+  869  kubectl delete pod testing-service
+  870  clear
+  871  vi basic-single-container-node-selector.yml 
+  872  lcear
+  873  clear
+  874  kubectl create -f basic-single-container-node-selector.yml 
+  875  kubectl get pods
+  876  kubectl describe pod testing-service
+  877  vi basic-single-container-volume-pod.yml 
+  878  clear
+  879  cat basic-single-container-volume-pod.yml 
+  880  clear
+  881  kubectl get pods
+  882  kubectl delete pod testing-service
+  883  clear
+  884  kubectl create -f basic-single-container-volume-pod.yml 
+  885  kubectl get pods
+  886  kubectl create -f basic-single-container-volume-pod.yml 
+  887  kubectl get pods
+  888  watch kubectl get pods
+  889  clear
+  890  kubectl get pods
+  891  clear
+  892  watch kubectl get pods
+  893  kubectl get pods
+  894  mount -a
+  895  mount 
+  896  mount  | grep loddisk
+  897  cd /mnt/share/
+  898  ll
+  899  kubectl get pods
+  900  clear
+  901  history | grep git
+  902  cd /root/kubetesting/
+  903  cd kubenetes-config/
+  904  ll
+  905  git add .
+  906  git clone https://github.com/jagadish12/kubenetes-config.git
+  907  git push origin master
+  908  git add .
+  909  git commit -m "second commit"
+  910  git push origin master
+  911  clear
+  912  docker images
+  913  docker run -d -p 10000:9876 docker.io/jagadesh1982/testing-service
+  914  docker run -d -p 11000:9876 docker.io/jagadesh1982/testing-service
+  915  curl localhost:11000/info
+  916  curl localhost:11000/health
+  917  curl localhost:11000/env
+  918  clear
+  919  cd ..
+  920  ll
+  921  cd ..
+  922  ll
+  923  cd testing-service/
+  924  ll
+  925  cat testing_service.py 
+  926  curl localhost:11000/info
+  927  clear
+  928  cat Dockerfile 
+  929  clear
+  930  kubectl get nodes
+  931  clear
+  932  kubectl get pods
+  933  clear
+  934  kubectl get pods
+  935  kubectl delete pod testing-service
+  936  clear
+  937  kubectl get rs
+  938  kubectl get rc
+  939  kubectl get deploy
+  940  kubectl get deployments
+  941  clear
+  942  kubectl cluster-info
+  943  clear
+  944  kubectl component-status
+  945  kubectl component status
+  946  clear
+  947  open http://localhost:8000/swagger-ui/
+  948  hostname
+  949  hostname -I
+  950  clear
+  951  kubectl run my-shell --rm -i --tty --image ubuntu -- bash
+  952  clear
+  953  kubectl run -i --tty busybox --image=busybox -- sh
+  954  clear
+  955  kubectl get nds
+  956  kubectl get ns
+  957  cd kubetesting/kube-testing/
+  958  ll
+  959  cd ..
+  960  ll
+  961  cd kubenetes-config/
+  962  clear
+  963  ll
+  964  vi basic-namespace.yml
+  965  clear
+  966  cat basic-namespace.yml 
+  967  kubectl create -f basic-namespace.yml 
+  968  vi basic-pod-in-namespace.yml
+  969  ll
+  970  cat basic-pod-in-namespace.yml 
+  971  cat basic-single-container-pod.yml 
+  972  vi basic-pod-in-namespace.yml 
+  973  clear
+  974  cat basic-pod-in-namespace.yml 
+  975  kubectl create -f basic-pod-in-namespace.yml 
+  976  kubectl get pods
+  977  kubectl pod sample-testing
+  978  kubectl describe pod sample-testing
+  979  clear
+  980  kubectl get pods
+  981  kubectl delete pod sample-testing
+  982  kubectl create --namespace=test basic-pod-in-namespace.yml 
+  983  clear
+  984  kubectl create --namespace=test -f basic-pod-in-namespace.yml 
+  985  kubectl get ns
+  986  vi basic-pod-in-namespace.yml 
+  987  kubectl create --namespace=sample-testing -f basic-pod-in-namespace.yml 
+  988  kubectl get pods
+  989  clear
+  990  cat basic-pod-in-namespace.yml 
+  991  vi basic-ssh-pod.yml
+  992  clear
+  993  kubectl create -f basic-ssh-pod.yml 
+  994  kubectl get pods
+  995  claer
+  996  kubectl get pods
+  997  clear
+  998  kubectl describe pod nginx
+  999  clear
+ 1000   kubectl attach -it nginx -c shell
+ 1001  clear
+ 1002  kubectl get nodes
+ 1003  cd /root/vagrant/
+ 1004  clear
+ 1005  ll
+ 1006  cat Vagrantfile 
+ 1007  clear
+ 1008  vagrant ssh
+ 1009  vagrant ssh node1
+ 1010  clear
+ 1011  kubectl get nodes
+ 1012  cd /root/
+ 1013  ll
+ 1014  cd kubetesting/
+ 1015  ll
+ 1016  cd kubenetes-config/
+ 1017  pwd
+ 1018  cd ~
+ 1019  vi .bashrc 
+ 1020  source .bashrc 
+ 1021  kubeb
+ 1022  kube
+ 1023  ll
+ 1024  pwd
+ 1025  clear
+ 1026  kube
+ 1027  set | grep kube
+ 1028  vi .bashrc 
+ 1029  source .bashrc 
+ 1030  kube
+ 1031  vi .bashrc 
+ 1032  source .bashrc 
+ 1033  kube
+ 1034  pwd
+ 1035  vi .bashrc 
+ 1036  clear
+ 1037  source .bashrc 
+ 1038  kube
+ 1039  pwd
+ 1040  clear
+ 1041  cd /root/
+ 1042  kube
+ 1043  clear
+ 1044  ll
+ 1045  clear
+ 1046  ll
+ 1047  cat basic-pod-in-namespace.yml 
+ 1048  clear
+ 1049  kubectl get pods
+ 1050  clear
+ 1051  ll
+ 1052  vi basic-daemonset.yml
+ 1053  clear
+ 1054  kubectl create -f basic-daemonset.yml 
+ 1055  kubectl get daemonsets
+ 1056  kubectl get pods
+ 1057  kubectl delete pod nginx
+ 1058  kubectl delete pod myapp-pod
+ 1059  kubectl get pods
+ 1060  kubectl delete pod busybox-5858cc4697-w2qw9 my-shell-68974bb7f7-2pwtd
+ 1061  kubectl get pods
+ 1062  kubectl  get deploy
+ 1063  kubectl delete deploy busybox my-shell
+ 1064  clear
+ 1065  kubectl get pods
+ 1066  kubectl  get deploy
+ 1067  kubectl get pods
+ 1068  clear
+ 1069  kubectl get pods
+ 1070  clear
+ 1071  kubectl get daemonsets
+ 1072  kubectl get pods
+ 1073  kubectl get nodes -o wide
+ 1074  kubectl get nodes --show-labels
+ 1075  history | grep label
+ 1076  clear
+ 1077  cat basic-daemonset.yml 
+ 1078  kubectl label nodes work-node2 label=frontend-node
+ 1079  kubectl get pods
+ 1080  clear
+ 1081  kubectl get pods
+ 1082  kubectl get daemonsets
+ 1083  kubectl delete daemonset frontend
+ 1084  kubectl create -f basic-daemonset.yml 
+ 1085  kubectl get pods
+ 1086  kubectl get nodes --show-labels
+ 1087  cat basic-daemonset.yml 
+ 1088  kubectl get pods
+ 1089  kubectl delete pod healthcheck
+ 1090  kubectl get pods
+ 1091  clear
+ 1092  kubectl get nodes --show-labels
+ 1093  cat basic-daemonset.yml 
+ 1094  clear
+ 1095  kubectl get daemonsets
+ 1096  kubectl delete daemonset frontend
+ 1097  clear
+ 1098  kubectl get nodes
+ 1099  kubectl label node work-node1 node1 -
+ 1100  kubectl label node work-node1 node1-
+ 1101  kubectl label -all node1-
+ 1102  kubectl label -all node1 -
+ 1103  clear
+ 1104  kubectl label -j
+ 1105  kubectl label -h
+ 1106  clear
+ 1107  kubectl label -h
+ 1108  clear
+ 1109  kubectl get nodes --show-label
+ 1110  kubectl get nodes --show-labels
+ 1111  clear
+ 1112  kubectl get nodes --show-labels
+ 1113  kubectl label nodes work-node2 frontend-node-
+ 1114  kubectl label nodes work-node2 frontend-node -
+ 1115  kubectl get nodes --show-labels
+ 1116  kubectl label nodes  frontend-node-
+ 1117  clear
+ 1118  kubectl get pods
+ 1119  kubectl get daemonsets
+ 1120  kubectl label nodes work-node2 app=frontend-node
+ 1121  kubectl get pods
+ 1122  kubectl get nodes --show-labels
+ 1123  kubectl label node work-node2 app=frontend-node
+ 1124  clear
+ 1125  kubectl label node work-node1 app=frontend-node
+ 1126  kubectl get pods
+ 1127  kubectl get nodes --show-labels
+ 1128  kubectl get pods
+ 1129  clear
+ 1130  kubectl get nodes
+ 1131  kubectl get pods
+ 1132  kubectl get ds
+ 1133  kubectl get daemonsets
+ 1134  kubectl get daemonset
+ 1135  clear
+ 1136  kubectl get daemonset
+ 1137  kubectl create -f basic-daemonset.yml 
+ 1138  kubectl get ds
+ 1139  kubectl get pods
+ 1140  cat basic-daemonset.yml 
+ 1141  kubectl get pods
+ 1142  kubectl describe pod frontend-7sc22
+ 1143  history | grep label
+ 1144  clear
+ 1145  kubectl get pods
+ 1146  kubectl get nodes --show-labels
+ 1147  kubectl label  node work-node1 --overwrite app=backend
+ 1148  kubectl get pods
+ 1149  kubectl --version
+ 1150  kubectl version
+ 1151  clear
+ 1152  kubectl version
+ 1153  clear
+ 1154  kubectl get ns
+ 1155  vi basic-resourcequota.yml
+ 1156  clear
+ 1157  cat basic-re
+ 1158  cat basic-resourcequota.yml 
+ 1159  kubectl get ns
+ 1160  kubectl create -f basic-resourcequota.yml --name-space=sample-testing
+ 1161  clear
+ 1162  kubectl create -f basic-resourcequota.yml --namespace=sample-testing
+ 1163  kubectl get rs
+ 1164  kubectl get resourequotas
+ 1165  kubectl get resourequota
+ 1166  kubectl get resourcequota
+ 1167  kubectl get resourcequotas
+ 1168  kubectl get resourcequota
+ 1169  kubectl get resourcequota --namespace=sample-testing
+ 1170  clear
+ 1171  kubectl get pods
+ 1172  clear
+ 1173  cat basic-single-container-pod.yml 
+ 1174  cp basic-single-container-pod.yml basic-resource-quota-test.yml
+ 1175  vi basic-resource-quota-test.yml 
+ 1176  clear
+ 1177  cat basic-resource-quota-test.yml 
+ 1178  kubectl -f basic-resource-quota-test.yml --namespace=sample-testing
+ 1179  kubectl create -f basic-resource-quota-test.yml --namespace=sample-testing
+ 1180  clear
+ 1181  cat * | grep replica
+ 1182  grep replica
+ 1183  grep replica *
+ 1184  vi basic-deployment.yml 
+ 1185  clear
+ 1186  ll
+ 1187  rm basic-resource-quota-test.yml 
+ 1188  cp basic-deployment.yml basic-resource-quota-test.yml
+ 1189  vi basic-resource-quota-test.yml 
+ 1190  clear
+ 1191  kubectl create -f basic-resource-quota-test.yml --namespace=sample-testing
+ 1192  kubectl get pods
+ 1193  kubectl get deployment --namespace=sample-testing
+ 1194  kubectl get pods --namespace=sample-testing
+ 1195  kubectl get deployment --namespace=sample-testing
+ 1196  cat basic-resource-quota-test.yml 
+ 1197  kubectl get rs --namespace=testing
+ 1198  kubectl get replicaset --namespace=testing
+ 1199  clear
+ 1200  kubectl get pods --namespace=sample-testing
+ 1201  kubectl get deployments --namespace=sample-testing
+ 1202  kubectl describle deployment test-service-deploy --namespace=sample-testing
+ 1203  kubectl describe deployment test-service-deploy --namespace=sample-testing
+ 1204  clear
+ 1205  kubectl cluster-info
+ 1206  clear
+ 1207  exportfs -1
+ 1208  exportfs -a
+ 1209  clear
+ 1210  df -hT
+ 1211  mount -f -l /mnt/share
+ 1212  df -hT
+ 1213  clear
+ 1214* mount 
+ 1215  mount
+ 1216  clear
+ 1217  vi /etc/exports
+ 1218  exportfs -a
+ 1219  clear
+ 1220  mount 
+ 1221  mount -l 10.131.175.138:/loddisk2/share
+ 1222  mount -l -f 10.131.175.138:/loddisk2/share
+ 1223  mount 
+ 1224  clear
+ 1225  ll
+ 1226  history >> ./history-commands
