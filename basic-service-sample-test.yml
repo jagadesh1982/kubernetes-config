@@ -6,7 +6,7 @@ metadata:
     app: myapp
 spec:
   ports:
-  - port: 3000
+  - port: 9876
     protocol: TCP
   selector:
-    app: myapp
+    app: testing-service
