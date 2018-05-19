@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testing-service
+spec:
+  containers:
+    - name: test-ser
+      image: docker.io/jagadesh1982/testing-service
+      ports:
+      - containerPort: 9876
+      livenessProbe:
+        initialDelaySeconds: 2
+        periodSeconds: 5
+        exec:
+         command:
+          - cat
+          - /testing_service.py
+
+         

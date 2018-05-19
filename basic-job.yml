@@ -1,14 +1,17 @@
-apiVersion: v1
-kind: Job 
+apiVersion: batch/v1
+kind: Job
 metadata:
-   name: py
+  name: package-check
 spec:
- template:
-   metadata
-     name: py 
-     spec:
-       containers:
-         - name: py 
-           image: python
-           command: ["python", "SUCCESS"]
-           restartPocliy: Never 
+  template:
+    metadata:
+      labels:
+        image: ubuntu
+        test: dpkg
+        owner: Amy
+    spec:
+      containers:
+      - name: package-check
+        image: ubuntu
+        command: ["dpkg-query", "-l"]
+      restartPolicy: Never

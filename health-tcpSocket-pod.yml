@@ -11,6 +11,6 @@ spec:
       livenessProbe:
         initialDelaySeconds: 2
         periodSeconds: 5
-        httpGet:
-          path: /health
-          port: 9876      
+        tcpSocket:
+          port: 9876       
+        
