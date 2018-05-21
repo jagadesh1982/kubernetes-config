@@ -16,5 +16,6 @@ spec:
          name: data
   volumes:
     - name: data
-      emptyDir: {}
+      emptyDir: 
+        medium: Memory 
 

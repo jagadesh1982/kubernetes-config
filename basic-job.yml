@@ -1,17 +1,18 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: package-check
+  name: testing-service
 spec:
   template:
     metadata:
       labels:
-        image: ubuntu
-        test: dpkg
-        owner: Amy
+        name: testing-service
     spec:
       containers:
-      - name: package-check
-        image: ubuntu
-        command: ["dpkg-query", "-l"]
+      - name: counter
+        image: centos:7
+        command: 
+          - "bin/bash"
+          - "-c"
+          - "for i in 9 8 7 6 5 4 3 2 1 ; do echo $i ; done"
       restartPolicy: Never

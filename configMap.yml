@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: testing-service-staging
+  labels:
+    name: testing-service-staging
+data:
+  config: |-
+    ---
+    :verbose: true
+    :environment: test
+    :logfile: log/sidekiq.log
+    :concurrency: 20
+    :queues:
+      - [default, 1]
+    :dynamic: true
+    :timeout: 300

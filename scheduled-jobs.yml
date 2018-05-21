@@ -1,0 +1,18 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: testing-service
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: counter
+              image: centos:7
+              command: 
+                 - "bin/bash"
+                 - "-c"
+                 - "for i in 3 2 1 ; do echo $i ; done"
+          restartPolicy: OnFailure
