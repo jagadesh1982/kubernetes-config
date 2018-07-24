@@ -1,17 +1,18 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: frontend
+  name: check-ram
 spec:
+  selector:
+    matchLabels:
+      name: checkRam
   template:
     metadata:
       labels:
-        app: frontend-webserver
+        name: checkRam
     spec:
-      nodeSelector:
-        app: frontend-node
       containers:
-        - name: webserver
-          image: nginx
-          ports:
-          - containerPort: 80
+      - name: ubuntu-free
+        image: ubuntu
+        command: ["/bin/bash","-c","while true; do free; sleep 30; done"]
+      restartPolicy: Always

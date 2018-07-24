@@ -8,7 +8,14 @@ spec:
   containers:
    - image: mysql:latest
      name:  "mysql"
+     env:
+      - name: "MYSQL_ROOT_PASSWORD"
+        value: "test"
      ports:
       - containerPort: 3306
-
-
+     volumeMounts:
+      - name: "k8s-mysql-storage"
+        mountPath: "/var/lib/mysql"
+  volumes:
+    - name: "k8s-mysql-storage"
+      emptyDir: {}

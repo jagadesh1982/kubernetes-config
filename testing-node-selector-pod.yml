@@ -17,3 +17,6 @@ spec:
         image: docker.io/jagadesh1982/testing-service
         ports:
         - containerPort: 9876
+      nodeSelector:
+        arch: arm
+

@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: testing-service
+spec:
+  completions: 3
+  template:
+    metadata:
+      labels:
+        name: testing-service
+    spec:
+      containers:
+      - name: counter
+        image: centos:7
+        command: 
+          - "bin/bash"
+          - "-c"
+          - "for i in 9 8 7 6 5 4 3 2 1 ; do echo $i ; done"
+      restartPolicy: Never
