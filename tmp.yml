@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testing-service
+  labels:
+    app: testing-service
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: testing-service
+  template:
+    metadata:
+      labels:
+        app: testing-service
+        version: "1.0"
+    spec:
+          containers:
+       - name: test-service
+         image: docker.io/jagadesh1982/testing-service
+         ports:
+          - name: http
+            containerPort: 9876
+         env:
+          - name: VERSION
+            value: "1.0"
+

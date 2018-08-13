@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: testing-service
+  labels:
+    app: testing-service
+spec:
+  replicas: 3
+  strategy:
+    type: Recreate
+
+  # The selector field tell the deployment which pod to update with
+  # the new version. This field is optional, but if you have labels
+  # uniquely defined for the pod, in this case the "version" label,
+  # then we need to redefine the matchLabels and eliminate the version
+  # field from there.
+  selector:
+    matchLabels:
+      app: testing-service
+  template:
+    metadata:
+      labels:
+        app: testing-service
+        version: "2.0"
+    spec:
+      containers:
+      - name: test-service
+        image: docker.io/jagadesh1982/testing-service
+        ports:
+        - name: http
+          containerPort: 9876
+        env:
+        - name: VERSION
+          value: "2.0"
+

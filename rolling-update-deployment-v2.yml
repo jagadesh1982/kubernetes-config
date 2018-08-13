@@ -1,0 +1,31 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: testing-service
+  labels:
+    app: testing-service
+spec:
+  replicas: 10
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: testing-service
+  template:
+    metadata:
+      labels:
+        app: testing-service
+        version: "2.0"
+    spec:
+      containers:
+      - name: test-service
+        image: docker.io/jagadesh1982/testing-service
+        ports:
+        - name: http
+          containerPort: 9876
+        env:
+        - name: VERSION
+          value: "2.0"
